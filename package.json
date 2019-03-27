@@ -1,0 +1,24 @@
+{
+  "name": "vue-resume",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "leancloud-storage": "^3.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yyhsz/vue-resume.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yyhsz/vue-resume/issues"
+  },
+  "homepage": "https://github.com/yyhsz/vue-resume#readme"
+}

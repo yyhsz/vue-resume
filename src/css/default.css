@@ -1,0 +1,67 @@
+* {margin: 0;padding: 0;box-sizing: border-box;}
+*::after,*::before {box-sizing: border-box}
+ul,ol {list-style: none;}
+a{text-decoration: none;color: inherit}
+@media(min-width:500px) {
+    .page {
+        display: flex;
+        justify-content: space-between;
+        height: 100vh;
+    }
+}
+.page>aside {
+    border-right: 1px dashed black;
+    width: 200px;
+    display: flex;flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+.page>aside>.up{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.page>aside button{
+    padding: 6px 20px;
+    margin: 10px;
+}
+.page>main {
+
+    flex-grow: 1;
+    overflow: auto;
+}
+.page>main section{
+    
+    margin:50px 0;
+}
+.page>main section>h1{
+    text-align: center;
+    margin-bottom:20px;
+}
+.page>main>.resume{
+    margin: 0 auto;
+    max-width: 800px;
+    border:1px solid red;
+}
+.page>main .profile>p{
+    text-align: center
+}
+.page>main .skills>ul>li{
+    margin: 20px 6px;
+    border:1px dashed #ddd;
+    padding:10px;
+}
+.page>main .works>ul>li{
+    border:1px dashed #ddd;
+    padding:10px;
+    margin: 20px 6px;
+}
+.page>main .works>ul>li>span{
+    display: inline-block;
+    width: 100%;
+}
+.page>main .works>ul>li>div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
