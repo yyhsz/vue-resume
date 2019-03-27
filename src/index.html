@@ -100,14 +100,14 @@
         Vue.component('editable-area',{
             template:`
             <div>
-                <span>span</span>
-                <input type="text" v-show='!editing'>
-                <button>edit</button>
+                <span v-show='!editing'>哈哈哈</span>
+                <input type="text" v-show='editing' >
+                <button @click='editing=!editing'>edit</button>
             </div>    
             `,
             data(){
                 return{
-                    editing:true
+                    editing:false
                 }
             }
         })
