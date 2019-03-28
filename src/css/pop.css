@@ -1,0 +1,77 @@
+.pop{
+    position: fixed;
+    top: 0;left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;justify-content: center;align-items: center;
+}
+.pop form{
+    position: relative;
+    height: 400px;width: 420px;
+    border-bottom: 1px solid rgb(235, 235, 235);
+    border-right: 6px;
+    background: white;
+    text-align: center;
+    overflow: auto;
+}
+.pop form .close{
+    background:rgb(0, 132, 255);
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+    line-height: 22px;
+    text-align: center;height: 22px;width: 22px;
+    font-size: 14px;
+    padding: 0px;
+    top: 2%;
+    right: 3%;
+    position: absolute;
+    cursor: pointer;
+}
+.pop form .close::before {
+    content: "\2716";
+}
+.pop form .close::after{
+    display: none;
+}
+
+.pop form h1{
+    text-align: center;
+    margin: 30px 0 30px 0;
+    color:rgb(0, 132, 255);
+}
+.pop form input{
+    width: 80%;
+    border: none;
+    background: transparent;
+    line-height: 40px;
+}
+.pop form div{
+    margin:10px 0;
+}
+.pop form div::after{
+    content: '';
+    display: block;
+    width: 80%;
+    border: 1px solid #ddd;
+    margin:  0 auto;
+}
+.pop form button{
+    background: rgb(0, 132, 255);
+    margin-top:30px;
+    width: 260px;
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+}
+.pop  footer{
+
+    background: rgb(246, 246, 246);
+    height: 60px;
+    display: flex;align-items: center;justify-content: center;
+}
+.pop footer a{
+    color: rgb(103, 183, 248)
+}
