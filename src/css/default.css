@@ -9,69 +9,78 @@ a{text-decoration: none;color: inherit}
         height: 100vh;
     }
 }
-.page>aside {
+aside {
     border-right: 1px dashed black;
     width: 200px;
     display: flex;flex-direction: column;
     justify-content: space-between;
     text-align: center;
 }
-.page>aside>.up{
+aside>.up{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.page>aside button{
+aside button{
     padding: 6px 20px;
     margin: 10px;
 }
-.page>main {
+main {
 
     flex-grow: 1;
     overflow: auto;
 }
-.page>main section{
+main section{
     margin:50px 0;
 }
-.page>main section>h1{
+main section>h1{
     text-align: center;
 }
-.page>main section>div>span{
+main section>div>span{
     text-align: center;
     margin-bottom:20px;
     font-size: 1.5em;
     margin-block-start: 0.83em;
     margin-block-end: 0.83em;
 }
-.page>main .profile>div{
+main .profile{
     text-align: center;
-    height: 40px;
+    
 }
+main .profile>p{
+    margin-top: 16px;
+    text-align: center
+}
+/* main .profile input{
+    position: absolute;
+    bottom:0;
+} */
 
-.page>main>.resume{
+
+main>.resume{
     margin: 0 auto;
     max-width: 800px;
     border:1px solid red;
 }
-.page>main .profile>p{
-    text-align: center
-}
-.page>main .skills>ul>li{
+
+main .skills>ul>li{
     margin: 20px 6px;
     border:1px dashed #ddd;
     padding:10px;
 }
-.page>main .works>ul>li{
+main .works>ul>li{
     border:1px dashed #ddd;
     padding:10px;
     margin: 20px 6px;
 }
-.page>main .works>ul>li>span{
-    display: inline-block;
-    width: 100%;
+main .works>ul>li>span{
+    width: 100%; 
 }
-.page>main .works>ul>li>div{
+
+main .works>ul>li>div{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
+

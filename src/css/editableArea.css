@@ -1,0 +1,13 @@
+.editableArea{
+    font-size: inherit;
+    position: relative;
+}
+.editableArea>button{
+    display: none;
+}
+.editableArea:hover>button{
+    display: inline;
+    position: absolute;
+    bottom:10%;
+    z-index: 1;
+}

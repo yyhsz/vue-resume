@@ -7,13 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="./css/default.css">
+    <link rel="stylesheet" href="./css/editableArea.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 
 <body>
     <div class="page" id="app">
         <aside>
             <ul class="up">
-                <li> <button>保存</button></li>
+                <li> <button @click='clickSave'>保存</button></li>
                 <li> <button>分享</button></li>
                 <li> <button>打印</button></li>
                 <li> <button>换肤</button></li>
@@ -25,9 +27,20 @@
         <main>
             <div class="resume">
                 <section class="profile">
-                    <editable-area></editable-area>
+                    <h1>
+                        <editable-area :value='resume.name' v-on:edit='onEdit(`name`,$event)'></editable-area>
+                    </h1>
+                    <!--y和resume.name 都是父组件的属性，不能写子组件内部的东西？-->
+                    <p>应聘职位：<editable-area :value='resume.job' v-on:edit='onEdit(`job`,$event,x)'>
+                    </p>
                     <p>
-                        {{resume.age}} | {{resume.job}} | {{resume.gender}} | {{resume.email}} | {{resume.phone}}
+                        <editable-area :value='resume.age' v-on:edit='onEdit(`age`,$event)'></editable-area>
+                        |
+                        <editable-area :value='resume.gender' v-on:edit='onEdit(`gender`,$event)'></editable-area>
+                        |
+                        <editable-area :value='resume.email' v-on:edit='onEdit(`email`,$event)'></editable-area>
+                        |
+                        <editable-area :value='resume.phone' v-on:edit='onEdit(`phone`,$event)'></editable-area>
                     </p>
                 </section>
                 <section class="skills">
@@ -47,7 +60,7 @@
                         </li>
                     </ul>
                 </section>
-                <section class="works" >
+                <section class="works">
                     <h1>项目经历</h1>
                     <ul>
                         <li>
@@ -90,49 +103,34 @@
                 </section>
             </div>
         </main>
-
+        <div v-show='loginVisible' class="pop">
+            <div class="loginFrame">              
+                <form action="">
+                        <h1>登陆</h1>
+                    <div class="close" @click='loginVisible=false'></div>
+                </form>
+                <footer>
+                    <span>没有账号？</span><a href="#" @click='signUpVisible=true;loginVisible=false'>注册</a>
+                </footer>
+            </div>
+        </div>
+        <div v-show='signUpVisible' class="pop">
+                <div class="loginFrame">              
+                    <form action="">
+                            <h1>注册</h1>
+                        <div class="close" @click='signUpVisible=false'></div>
+                    </form>
+                    <footer>
+                        <span>已有账号？</span><a href="#" @click='signUpVisible=false;loginVisible=true'>登陆</a>
+                    </footer>
+                </div>
+            </div>
     </div>
-    
     <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="./js/av.js"></script>
     <script src="../node_modules/vue/dist/vue.min.js"></script>
-    <script>
-        Vue.component('editable-area',{
-            template:`
-            <div>
-                <span v-show='!editing'>哈哈哈</span>
-                <input type="text" v-show='editing' >
-                <button @click='editing=!editing'>edit</button>
-            </div>    
-            `,
-            data(){
-                return{
-                    editing:false
-                }
-            }
-        })
-        var vm = new Vue({
-            el:'#app',
-            data:{
-                resume:{
-                    name:'yyh',
-                    gender:'男',
-                    age:'20',
-                    job:'前端工程师',
-                    email:'12332@qq.com',
-                    phone:'2348923758'
-
-                }
-            },
-            methods:{
-                x(e){
-                    this.resume.name = e.currentTarget.innerText
-                    console.log(this.resume.name)
-                }
-            }
-        })
-    
-    </script>
+    <script src="./js/editable-area.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>
