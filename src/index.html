@@ -103,7 +103,7 @@
                 </section>
             </div>
         </main>
-        <div v-show='loginVisible' class="pop">
+        <div v-show='loginVisible' class="pop" v-cloak>
             <div class="loginFrame">
                 <form @submit.prevent="onLogin">
                     <h1>登&nbsp陆</h1>
@@ -122,7 +122,7 @@
                 </footer>
             </div>
         </div>
-        <div v-show='signUpVisible' class="pop">
+        <div v-show='signUpVisible' class="pop" v-cloak>
             <div class="loginFrame">
                 <form @submit.prevent="onSignUp">
                     <h1>注&nbsp册</h1>
