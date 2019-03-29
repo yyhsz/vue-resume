@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>在线简历编辑器</title>
     <link rel="stylesheet" href="./css/default.css">
     <link rel="stylesheet" href="./css/editableArea.css">
     <link rel="stylesheet" href="./css/pop.css">
@@ -21,7 +21,7 @@
                 <li> <button>换肤</button></li>
             </ul>
             <div class="down">
-                <button>登出</button>
+                <button @click="onLogout">登出</button>
             </div>
         </aside>
         <main>
@@ -104,35 +104,40 @@
             </div>
         </main>
         <div v-show='loginVisible' class="pop">
-            <div class="loginFrame">              
-                <form action="">
-                        <h1>登&nbsp陆</h1>
+            <div class="loginFrame">
+                <form @submit.prevent="onLogin">
+                    <h1>登&nbsp陆</h1>
                     <div class="close" @click='loginVisible=false'></div>
-                    <div><input type="text" placeholder="邮箱"></div>
-                        <div><input type="password" placeholder="密码"></div>
+                    <div><input type="text" placeholder="邮箱" v-model="login.userName">
+                        <span>用户名不存在</span>
+                    </div>
+                    <div>
+                        <input type="password" placeholder="密码" v-model="login.password">
+                        <span>密码错误</span>
+                    </div>
                     <button type="submit">登陆</button>
                 </form>
                 <footer>
-                    <span>没有账号？</span><a href="#" @click='signUpVisible=true;loginVisible=false'>注册</a>
+                    <span>没有账号？</span><a href="#" @click.prevent='signUpVisible=true;loginVisible=false'>注册</a>
                 </footer>
             </div>
         </div>
         <div v-show='signUpVisible' class="pop">
-                <div class="loginFrame">              
-                    <form action="">
-                            <h1>注&nbsp册</h1>
-                        <div class="close" @click='signUpVisible=false'></div>
-                        <div><input type="text" placeholder="邮箱"></div>
-                        <div><input type="password" placeholder="密码"></div>
-                        <div><input type="password" placeholder="再次输入密码"></div>
-                    <button type="submit">注册</button>
+            <div class="loginFrame">
+                <form @submit.prevent="onSignUp">
+                    <h1>注&nbsp册</h1>
+                    <div class="close" @click='signUpVisible=false'></div>
+                    <div><input type="text" placeholder="用户名" v-model="signUp.userName"></div>
+                    <div><input type="password" placeholder="密码" v-model="signUp.password"></div>
+                    <div><input type="password" placeholder="再次输入密码" v-model="signUp.matchPassword"></div>
 
-                    </form>
-                    <footer>
-                        <span>已有账号？</span><a href="#" @click='signUpVisible=false;loginVisible=true'>登陆</a>
-                    </footer>
-                </div>
+                    <button type="submit">注册</button>
+                </form>
+                <footer>
+                    <span>已有账号？</span><a href="#" @click.prevent='signUpVisible=false;loginVisible=true'>登陆</a>
+                </footer>
             </div>
+        </div>
     </div>
     <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="./js/av.js"></script>
