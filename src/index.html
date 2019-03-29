@@ -13,6 +13,7 @@
 
 <body>
     <div class="page" id="app">
+        
         <aside>
             <ul class="up">
                 <li> <button @click='clickSave'>保存</button></li>
@@ -20,8 +21,8 @@
                 <li> <button>打印</button></li>
                 <li> <button>换肤</button></li>
             </ul>
-            <div class="down">
-                <button @click="onLogout">登出</button>
+            <div class="down" v-cloak>
+                <button @click="onLogout"  v-show="currentUser.id">注销</button>
             </div>
         </aside>
         <main>

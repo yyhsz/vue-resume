@@ -20,16 +20,18 @@ let vm = new Vue({
         login: {
             userName: '',
             password: '',
+        },
+        currentUser:{
+            id:'',
+            username:'',
         }
     },
     methods: {
         onEdit(key, value, x) {
-            console.log(x)
             this.resume[key] = value
         },
         clickSave() {
-            let currentUser = AV.User.current()
-            if (!currentUser) {
+            if (!AV.User.current()) {
                 this.loginVisible = true
             } else {
                 this.saveResume(AV.User.current().id)
@@ -38,36 +40,64 @@ let vm = new Vue({
         saveResume(id){
             var user = AV.Object.createWithoutData('User', id);
             user.set('resume',this.resume);
-            user.save();
+            user.save()
+                .then(()=>{
+                    alert('保存成功')
+                }).catch(()=>{
+                    alert('保存失败')
+                })
         },
         onSignUp(e) {
             let user = new AV.User();
             user.setUsername(this.signUp.userName);
             user.setPassword(this.signUp.password);
-            user.signUp().then((loggedInUser) => {
+            user.signUp().then((user) => {
                 this.signUp.userName = '';
                 this.signUp.password = '';
                 this.signUp.matchPassword = '';
-                this.loginVisible = true;
+                this.loginVisible = false;
                 this.signUpVisible = false;
-                AV.User.logOut();
+                this.currentUser.id = user.id;
+                this.currentUser.userName = user.attributes.username;
+                
+                alert('注册成功，已登陆');
             }).catch((x) => {
                 console.log(x)
             })
         },
         onLogin(e) {
-            AV.User.logIn(this.login.userName, this.login.password).then(function (loggedInUser) {
-                console.log(loggedInUser);
+            AV.User.logIn(this.login.userName, this.login.password).then((user)=>{
                 this.loginVisible = false;
+                let query = new AV.Query('User');
+                query.get(user.id).then((user)=>{
+                    if(user.attributes.resume){
+                        Object.assign(this.resume,user.attributes.resume) 
+                        console.log(this.resume)
+                    }
+                })
+                alert('登陆成功')
             }).catch(function (error) {
                 if(error.code === 211) alert('用户名不存在')
+                if(error.code === 210) alert('密码错误')
             });
         },
         onLogout(){
             AV.User.logOut();
-            window.location.reload()
+            [this.currentUser.id,this.currentUser.email] = ["",""]
+            window.location.reload();
         }
 
+    },
+    mounted(){
+        if(AV.User.current()){
+            [this.currentUser.id,this.currentUser.username] = [AV.User.current().id,AV.User.current().attributes.username]
+            let query = new AV.Query('User');
+            query.get(AV.User.current().id).then((user)=>{
+                if(user.attributes.resume){
+                    Object.assign(this.resume,user.attributes.resume) 
+                }
+            }).catch((error)=>{console.log(error)})
+        }
     }
 })
 
