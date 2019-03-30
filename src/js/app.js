@@ -20,7 +20,8 @@ let vm = new Vue({
                 {name:'项目名称',keywords:'关键词',description:'xxxxxxxxx',link:'httpxxxxxxx',preview:'httpxxxxxxx'},            
             ],
         },
-        
+        shareVisible:false,
+        shareUrl:'',
         loginVisible: false, //登陆
         signUpVisible: false,//注册
         signUp: {
@@ -124,12 +125,18 @@ let vm = new Vue({
         },
         removeWork(index){
             this.resume.works.splice(index,1)
+        },
+        copy(){
+            this.$el.querySelector('#copy').select()
+            document.execCommand("Copy"); // 执行浏览器复制命令 
+            alert("已复制好，可贴粘。");
         }
 
     },
     mounted(){
         if(AV.User.current()){
             [this.currentUser.id,this.currentUser.username] = [AV.User.current().id,AV.User.current().attributes.username]
+            this.shareUrl = location.origin + location.pathname + '?user_id' + this.currentUser.id
             let query = new AV.Query('User');
             query.get(AV.User.current().id).then((user)=>{
                 if(user.attributes.resume){

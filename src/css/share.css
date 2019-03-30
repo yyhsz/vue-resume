@@ -1,0 +1,55 @@
+.close{
+    background:rgb(0, 132, 255);
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+    line-height: 22px;
+    text-align: center;height: 22px;width: 22px;
+    font-size: 14px;
+    padding: 0px;
+    top: 4%;
+    right: 1%;
+    position: absolute;
+    cursor: pointer;
+}
+.close::before {
+    content: "\2716";
+}
+.close::after{
+    display: none; 
+}
+.share{
+    position: fixed;top:50%;left:50%;transform: translateY(-50%) translateX(-50%);
+    height: 100px;
+    width: 600px;
+    border:1px dashed #ddd;
+    box-shadow: 1px 1px 1px 0px rgba(148, 149, 150, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(235, 234, 233);
+    border-radius: 6px;
+}
+.share>div{
+    margin:0 20px;
+}
+.share input{
+    width:300px;
+    height: 36px;
+    font-size: 20px;
+    color: rgb(0, 132, 255);
+    border-radius: 5px;
+    border: transparent;
+    text-align: center;
+    background: rgba(171, 214, 253, 0.8);
+    padding:2px 10px;
+}
+.share button{
+    border:transparent;
+    width:70px;
+    height: 36px;
+    background: rgb(0, 132, 255);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
