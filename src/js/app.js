@@ -36,7 +36,8 @@ let vm = new Vue({
         currentUser:{
             id:'',
             username:'',
-        }
+        },
+        ifPreview:false,
     },
     methods: {
         onEdit(key, value, x) {
@@ -94,11 +95,12 @@ let vm = new Vue({
         onLogin(e) {
             AV.User.logIn(this.login.userName, this.login.password).then((user)=>{
                 this.loginVisible = false;
+                [this.currentUser.id,this.currentUser.username] = [AV.User.current().id,AV.User.current().attributes.username]
+                this.shareUrl = location.origin + location.pathname + '?user_id' + this.currentUser.id
                 let query = new AV.Query('User');
                 query.get(user.id).then((user)=>{
                     if(user.attributes.resume){
                         Object.assign(this.resume,user.attributes.resume) 
-                        console.log(this.resume)
                     }
                 })
                 alert('登陆成功')
@@ -127,14 +129,23 @@ let vm = new Vue({
             this.resume.works.splice(index,1)
         },
         copy(){
-            this.$el.querySelector('#copy').select()
-            document.execCommand("Copy"); // 执行浏览器复制命令 
+            this.$el.querySelector('#copy').select() //主动触发文本框的input事件
+            document.execCommand("copy"); // 执行浏览器复制命令 
             alert("已复制好，可贴粘。");
         }
 
     },
     mounted(){
-        if(AV.User.current()){
+        if(window.location.search){
+            this.ifPreview = true;
+            console.log(this.ifPreview)            
+            let query = new AV.Query('User');
+            query.get(window.location.search.slice(8)).then((user)=>{
+                if(user.attributes.resume){
+                    Object.assign(this.resume,user.attributes.resume) 
+                }
+            }).catch((error)=>{console.log(error)})
+        }else if(AV.User.current()){            
             [this.currentUser.id,this.currentUser.username] = [AV.User.current().id,AV.User.current().attributes.username]
             this.shareUrl = location.origin + location.pathname + '?user_id' + this.currentUser.id
             let query = new AV.Query('User');

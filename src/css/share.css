@@ -1,4 +1,4 @@
-.close{
+.share .close{
     background:rgb(0, 132, 255);
     color: rgb(255, 255, 255);
     border-radius: 12px;
@@ -11,10 +11,10 @@
     position: absolute;
     cursor: pointer;
 }
-.close::before {
+.share .close::before {
     content: "\2716";
 }
-.close::after{
+.share .close::after{
     display: none; 
 }
 .share{

@@ -14,7 +14,7 @@
 
 <body>
     <div class="page" id="app">
-        <aside>
+        <aside v-show="!ifPreview">
             <ul class="up">
                 <li> <button @click="clickSave">保存</button></li>
                 <li> <button @click="if(AV.User.current()){shareVisible=true}else{loginVisible=true}">分享</button></li>
@@ -31,34 +31,34 @@
                 <section class="profile">
                     {{resume.skills}}
                     <h1>
-                        <editable-area :value='resume.name' v-on:edit='onEdit(`name`,$event)'></editable-area>
+                        <editable-area :preview="ifPreview" :value='resume.name' v-on:edit='onEdit(`name`,$event)'></editable-area>
                     </h1>
                     <!--y和resume.name 都是父组件的属性，不能写子组件内部的东西？-->
-                    <p>应聘职位：<editable-area :value='resume.job' v-on:edit='onEdit(`job`,$event,x)'>
+                    <p>应聘职位：<editable-area :preview="ifPreview" :value='resume.job' v-on:edit='onEdit(`job`,$event,x)'>
                     </p>
                     <p>
-                        <editable-area :value='resume.age' v-on:edit='onEdit(`age`,$event)'></editable-area>
+                        <editable-area :preview="ifPreview" :value='resume.age' v-on:edit='onEdit(`age`,$event)'></editable-area>
                         |
-                        <editable-area :value='resume.gender' v-on:edit='onEdit(`gender`,$event)'></editable-area>
+                        <editable-area :preview="ifPreview" :value='resume.gender' v-on:edit='onEdit(`gender`,$event)'></editable-area>
                         |
-                        <editable-area :value='resume.email' v-on:edit='onEdit(`email`,$event)'></editable-area>
+                        <editable-area :preview="ifPreview" :value='resume.email' v-on:edit='onEdit(`email`,$event)'></editable-area>
                         |
-                        <editable-area :value='resume.phone' v-on:edit='onEdit(`phone`,$event)'></editable-area>
+                        <editable-area :preview="ifPreview" :value='resume.phone' v-on:edit='onEdit(`phone`,$event)'></editable-area>
                     </p>
                 </section>
                 <section class="skills">
                     <h1>个人技能</h1>
                     <ul>
                         <li v-for="skill,index in resume.skills">
-                            <editable-area :value="skill.name" v-on:edit="onEdit(`skills[${index}].name`,$event)">
+                            <editable-area :preview="ifPreview" :value="skill.name" v-on:edit="onEdit(`skills[${index}].name`,$event)">
                             </editable-area>
                             <div>
-                                <editable-area :value="skill.description"
+                                <editable-area :preview="ifPreview" :value="skill.description"
                                     v-on:edit="onEdit(`skills[${index}].description`,$event)"></editable-area>
                             </div>
-                            <span class="close" v-show="index>1" @click="removeSkill(index)"></span>
+                            <span class="close" v-if="index>1 && !ifPreview" @click="removeSkill(index)"></span>
                         </li>
-                        <li @click="addSkill" class="addSkill"><span>添加</span></li>
+                        <li @click="addSkill" class="addSkill" v-if="!ifPreview"><span>添加</span></li>
                     </ul>
                 </section>
                 <section class="works">
@@ -67,31 +67,31 @@
                         <li v-for="work,index in resume.works">
                             <div>
                                 <h4 class="name">
-                                    <editable-area :value="work.name" v-on:edit="onEdit(`works[${index}].name`,$event)">
+                                    <editable-area :preview="ifPreview" :value="work.name" v-on:edit="onEdit(`works[${index}].name`,$event)">
                                     </editable-area>
                                 </h4>
                                 <span class="keywords">
-                                    <editable-area :value="work.keywords"
+                                    <editable-area :preview="ifPreview" :value="work.keywords"
                                         v-on:edit="onEdit(`works[${index}].keywords`,$event)"></editable-area>
                                 </span>
                             </div>
                             <div class="workInfo">
                                 <span class="description">
-                                    <editable-area :value="work.description"
+                                    <editable-area :preview="ifPreview" :value="work.description"
                                         v-on:edit="onEdit(`works[${index}].description`,$event)"></editable-area>
                                 </span>
                                 <span class="link">
-                                    <editable-area :value="work.link" v-on:edit="onEdit(`works[${index}].link`,$event)">
+                                    <editable-area :preview="ifPreview" :value="work.link" v-on:edit="onEdit(`works[${index}].link`,$event)">
                                     </editable-area>
                                 </span>
                                 <span class="preview">
-                                    <editable-area :value="work.preview"
+                                    <editable-area :preview="ifPreview" :value="work.preview"
                                         v-on:edit="onEdit(`works[${index}].preview`,$event)"></editable-area>
                                 </span>
                             </div>
-                            <span class="close" v-show="index>1" @click="removeWork(index)"></span>
+                            <span class="close" v-if="index>1 && !ifPreview" @click="removeWork(index)"></span>
                         </li>
-                        <li @click="addWork" class="addWork"><span>添加</span></li>
+                        <li @click="addWork" class="addWork" v-if="!ifPreview"><span>添加</span></li>
                     </ul>
                 </section>
             </div>

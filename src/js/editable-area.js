@@ -1,10 +1,10 @@
 Vue.component('editable-area', {
-    props: ['value'],
+    props: ['value','preview'],
     template: `
     <span class='editableArea'>
         <span v-show='!editing'>{{value}}</span>
-        <input type="text" v-show='editing' :value='value' @input='triggerEdit'>
-        <button @click='editing=!editing'>edit</button>
+        <input type="tepreviewt" v-show='editing' :value='value' @input='triggerEdit'>
+        <button @click='editing=!editing' v-show="!preview">edit</button>
     </span>    
     `,
     data() {
