@@ -14,8 +14,13 @@ let vm = new Vue({
                 {name:'技能名称',description:'技能描述'},
                 {name:'技能名称',description:'技能描述'},
                 
-            ]
+            ],
+            works:[
+                {name:'项目名称',keywords:'关键词',description:'xxxxxxxxxx',link:'httpxxxxxxx',preview:'httpxxxxxxx'},
+                {name:'项目名称',keywords:'关键词',description:'xxxxxxxxx',link:'httpxxxxxxx',preview:'httpxxxxxxx'},            
+            ],
         },
+        
         loginVisible: false, //登陆
         signUpVisible: false,//注册
         signUp: {
@@ -111,6 +116,14 @@ let vm = new Vue({
         },
         removeSkill(index){
             this.resume.skills.splice(index,1)
+        },
+        addWork(){
+            this.resume.works.push(
+                {name:'项目名称',keywords:'关键词',description:'xxxxxxxxxx',link:'httpxxxxxxx',preview:'httpxxxxxxx'},
+            )
+        },
+        removeWork(index){
+            this.resume.works.splice(index,1)
         }
 
     },

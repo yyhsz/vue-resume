@@ -9,5 +9,6 @@
     display: inline;
     position: absolute;
     bottom:10%;
+    left: 100%;
     z-index: 1;
 }

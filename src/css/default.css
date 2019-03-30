@@ -82,21 +82,16 @@ main .skills .close{
     position: absolute;
     cursor: pointer;
 }
-main .skills .close::before {
+.close::before {
     content: "\2716";
 }
-main .skills .close::after{
+.close::after{
     display: none; 
 }
 main .skills .addSkill{
     text-align: center;
     cursor: pointer;
 }
-
-
-
-
-
 
 main .works>ul>li{
     border:1px dashed #ddd;
@@ -110,7 +105,31 @@ main .works>ul>li>span{
 main .works>ul>li>div{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    
+    justify-content: space-between;   
+}
+main .works .workInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+main .works .addWork{
+    cursor: pointer;
+    text-align: center;
+}
+main .works ul>li {
+    position: relative;
+}
+main .works .close{
+    background:rgb(185, 191, 197);
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+    line-height: 22px;
+    text-align: center;height: 22px;width: 22px;
+    font-size: 14px;
+    padding: 0px;
+    bottom: 4%;
+    right: 1%;
+    position: absolute;
+    cursor: pointer;
 }
 

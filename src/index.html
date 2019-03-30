@@ -13,23 +13,23 @@
 
 <body>
     <div class="page" id="app">
-        
+
         <aside>
             <ul class="up">
-            <li> <button @click="clickSave">保存</button></li>
-            <li> <button>分享</button></li>
+                <li> <button @click="clickSave">保存</button></li>
+                <li> <button>分享</button></li>
                 <li> <button>打印</button></li>
                 <li> <button>换肤</button></li>
             </ul>
             <div class="down" v-cloak>
-                <button @click="onLogout"  v-show="currentUser.id">注销</button>
+                <button @click="onLogout" v-show="currentUser.id">注销</button>
             </div>
         </aside>
-        
+
         <main>
             <div class="resume">
                 <section class="profile">
-                        {{resume.skills}}
+                    {{resume.skills}}
                     <h1>
                         <editable-area :value='resume.name' v-on:edit='onEdit(`name`,$event)'></editable-area>
                     </h1>
@@ -50,54 +50,48 @@
                     <h1>个人技能</h1>
                     <ul>
                         <li v-for="skill,index in resume.skills">
-                            <editable-area :value="skill.name" v-on:edit="onEdit(`skills[${index}].name`,$event)"></editable-area>
+                            <editable-area :value="skill.name" v-on:edit="onEdit(`skills[${index}].name`,$event)">
+                            </editable-area>
                             <div>
-                            <editable-area :value="skill.description" v-on:edit="onEdit(`skills[${index}].description`,$event)"></editable-area>
+                                <editable-area :value="skill.description"
+                                    v-on:edit="onEdit(`skills[${index}].description`,$event)"></editable-area>
                             </div>
                             <span class="close" v-show="index>1" @click="removeSkill(index)"></span>
                         </li>
-                        <li @click="addSkill" class="addSkill"><span >添加</span></li>
+                        <li @click="addSkill" class="addSkill"><span>添加</span></li>
                     </ul>
                 </section>
                 <section class="works">
                     <h1>项目经历</h1>
                     <ul>
-                        <li>
+                        <li v-for="work,index in resume.works">
                             <div>
-                                <h4 class="name">项目名</h4>
-                                <span class="keywords">关键词</span>
+                                <h4 class="name">
+                                    <editable-area :value="work.name" v-on:edit="onEdit(`works[${index}].name`,$event)">
+                                    </editable-area>
+                                </h4>
+                                <span class="keywords">
+                                    <editable-area :value="work.keywords"
+                                        v-on:edit="onEdit(`works[${index}].keywords`,$event)"></editable-area>
+                                </span>
                             </div>
-                            <span class="description">项目描述</span>
-                            <span class="link">http://xxx.x.x.x.xxx</span>
-                            <span class="cover">http://xxx.x.x.x.xxx</span>
-                        </li>
-                        <li>
-                            <div>
-                                <h4 class="name">项目名</h4>
-                                <span class="keywords">关键词关键词关键词关键词关键词关键词关键词关键词关键词关键词关键词</span>
+                            <div class="workInfo">
+                                <span class="description">
+                                    <editable-area :value="work.description"
+                                        v-on:edit="onEdit(`works[${index}].description`,$event)"></editable-area>
+                                </span>
+                                <span class="link">
+                                    <editable-area :value="work.link" v-on:edit="onEdit(`works[${index}].link`,$event)">
+                                    </editable-area>
+                                </span>
+                                <span class="preview">
+                                    <editable-area :value="work.preview"
+                                        v-on:edit="onEdit(`works[${index}].preview`,$event)"></editable-area>
+                                </span>
                             </div>
-                            <span class="description">项目描述</span>
-                            <span class="link">http://xxx.x.x.x.xxx</span>
-                            <span class="cover">http://xxx.x.x.x.xxx</span>
+                            <span class="close" v-show="index>1" @click="removeWork(index)"></span>
                         </li>
-                        <li>
-                            <div>
-                                <h4 class="name">项目名</h4>
-                                <span class="keywords">关键词</span>
-                            </div>
-                            <span class="description">项目描述</span>
-                            <span class="link">http://xxx.x.x.x.xxx</span>
-                            <span class="cover">http://xxx.x.x.x.xxx</span>
-                        </li>
-                        <li>
-                            <div>
-                                <h4 class="name">项目名</h4>
-                                <span class="keywords">关键词</span>
-                            </div>
-                            <span class="description">项目描述</span>
-                            <span class="link">http://xxx.x.x.x.xxx</span>
-                            <span class="cover">http://xxx.x.x.x.xxx</span>
-                        </li>
+                        <li @click="addWork" class="addWork"><span>添加</span></li>
                     </ul>
                 </section>
             </div>
@@ -129,11 +123,11 @@
                     <div><input type="text" placeholder="用户名" v-model="signUp.userName"></div>
                     <div><input type="password" placeholder="密码" v-model="signUp.password"></div>
                     <div><input type="password" placeholder="再次输入密码" v-model="signUp.matchPassword"></div>
-                
+
                     <button type="submit">注册</button>
-                <footer>
-                    <span>已有账号？</span><a href="#" @click.prevent='signUpVisible=false;loginVisible=true'>登陆</a>
-                </footer>
+                    <footer>
+                        <span>已有账号？</span><a href="#" @click.prevent='signUpVisible=false;loginVisible=true'>登陆</a>
+                    </footer>
             </div>
         </div>
     </div>
