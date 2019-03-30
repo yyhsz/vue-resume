@@ -8,7 +8,13 @@ let vm = new Vue({
             job: '前端工程师',
             email: '12332@qq.com',
             phone: '2348923758',
-
+            skills:[
+                {name:'技能名称',description:'技能描述'},
+                {name:'技能名称',description:'技能描述'},
+                {name:'技能名称',description:'技能描述'},
+                {name:'技能名称',description:'技能描述'},
+                
+            ]
         },
         loginVisible: false, //登陆
         signUpVisible: false,//注册
@@ -28,7 +34,22 @@ let vm = new Vue({
     },
     methods: {
         onEdit(key, value, x) {
-            this.resume[key] = value
+            if(key.indexOf("[")===-1){
+                this.resume[key] = value
+            }else{
+                key = key.replace(/\[(\d+)\]/,(match,number)=>`.${number}`)
+                keys = key.split('.')
+                let result = this.resume
+                console.log(keys)
+                keys.forEach((v,k)=>{
+                    if(k===2){
+                        result[v] = value
+                    }else{
+                        result = result[v]
+                    }
+                })
+                
+            }
         },
         clickSave() {
             if (!AV.User.current()) {
@@ -58,8 +79,7 @@ let vm = new Vue({
                 this.loginVisible = false;
                 this.signUpVisible = false;
                 this.currentUser.id = user.id;
-                this.currentUser.userName = user.attributes.username;
-                
+                this.currentUser.userName = user.attributes.username;               
                 alert('注册成功，已登陆');
             }).catch((x) => {
                 console.log(x)
@@ -85,6 +105,12 @@ let vm = new Vue({
             AV.User.logOut();
             [this.currentUser.id,this.currentUser.email] = ["",""]
             window.location.reload();
+        },
+        addSkill(){
+            this.resume.skills.push({name:'技能名称',description:'技能描述'})
+        },
+        removeSkill(index){
+            this.resume.skills.splice(index,1)
         }
 
     },

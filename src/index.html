@@ -16,8 +16,8 @@
         
         <aside>
             <ul class="up">
-                <li> <button @click='clickSave'>保存</button></li>
-                <li> <button>分享</button></li>
+            <li> <button @click="clickSave">保存</button></li>
+            <li> <button>分享</button></li>
                 <li> <button>打印</button></li>
                 <li> <button>换肤</button></li>
             </ul>
@@ -25,9 +25,11 @@
                 <button @click="onLogout"  v-show="currentUser.id">注销</button>
             </div>
         </aside>
+        
         <main>
             <div class="resume">
                 <section class="profile">
+                        {{resume.skills}}
                     <h1>
                         <editable-area :value='resume.name' v-on:edit='onEdit(`name`,$event)'></editable-area>
                     </h1>
@@ -45,20 +47,16 @@
                     </p>
                 </section>
                 <section class="skills">
-                    <h1>技能</h1>
+                    <h1>个人技能</h1>
                     <ul>
-                        <li><span>技能名称</span>
-                            <div>技能描述</div>
+                        <li v-for="skill,index in resume.skills">
+                            <editable-area :value="skill.name" v-on:edit="onEdit(`skills[${index}].name`,$event)"></editable-area>
+                            <div>
+                            <editable-area :value="skill.description" v-on:edit="onEdit(`skills[${index}].description`,$event)"></editable-area>
+                            </div>
+                            <span class="close" v-show="index>1" @click="removeSkill(index)"></span>
                         </li>
-                        <li><span>技能名称</span>
-                            <div>技能描述</div>
-                        </li>
-                        <li><span>技能名称</span>
-                            <div>技能描述</div>
-                        </li>
-                        <li><span>技能名称</span>
-                            <div>技能描述</div>
-                        </li>
+                        <li @click="addSkill" class="addSkill"><span >添加</span></li>
                     </ul>
                 </section>
                 <section class="works">
@@ -131,9 +129,8 @@
                     <div><input type="text" placeholder="用户名" v-model="signUp.userName"></div>
                     <div><input type="password" placeholder="密码" v-model="signUp.password"></div>
                     <div><input type="password" placeholder="再次输入密码" v-model="signUp.matchPassword"></div>
-
+                
                     <button type="submit">注册</button>
-                </form>
                 <footer>
                     <span>已有账号？</span><a href="#" @click.prevent='signUpVisible=false;loginVisible=true'>登陆</a>
                 </footer>

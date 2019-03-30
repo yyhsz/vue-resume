@@ -35,7 +35,7 @@
     content: "\2716";
 }
 .pop form .close::after{
-    display: none;
+    display: none; 
 }
 
 .pop form h1{

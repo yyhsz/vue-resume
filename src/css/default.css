@@ -67,7 +67,37 @@ main .skills>ul>li{
     margin: 20px 6px;
     border:1px dashed #ddd;
     padding:10px;
+    position: relative;
 }
+main .skills .close{
+    background:rgb(185, 191, 197);
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+    line-height: 22px;
+    text-align: center;height: 22px;width: 22px;
+    font-size: 14px;
+    padding: 0px;
+    top: 4%;
+    right: 1%;
+    position: absolute;
+    cursor: pointer;
+}
+main .skills .close::before {
+    content: "\2716";
+}
+main .skills .close::after{
+    display: none; 
+}
+main .skills .addSkill{
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
+
+
+
 main .works>ul>li{
     border:1px dashed #ddd;
     padding:10px;
