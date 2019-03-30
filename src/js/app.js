@@ -132,6 +132,9 @@ let vm = new Vue({
             this.$el.querySelector('#copy').select() //主动触发文本框的input事件
             document.execCommand("copy"); // 执行浏览器复制命令 
             alert("已复制好，可贴粘。");
+        },
+        print(){
+            window.print()
         }
 
     },

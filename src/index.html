@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/editableArea.css">
     <link rel="stylesheet" href="./css/pop.css">
     <link rel="stylesheet" href="./css/share.css">
+    <link rel="stylesheet" href="./css/print.css" media="print">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
             <ul class="up">
                 <li> <button @click="clickSave">保存</button></li>
                 <li> <button @click="if(AV.User.current()){shareVisible=true}else{loginVisible=true}">分享</button></li>
-                <li> <button>打印</button></li>
+                <li> <button @click="print">打印</button></li>
                 <li> <button>换肤</button></li>
             </ul>
             <div class="down" v-cloak>
